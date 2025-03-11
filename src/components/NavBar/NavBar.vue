@@ -28,7 +28,7 @@
         <div class="w3-panel w3-large">
             <a href="https://fb.com/truongan15" class="w3-margin-right icon-color">
                 <i class="fa fa-facebook-official w3-hover-opacity"></i>
-            </a> 
+            </a>  
         </div>
         <div class="theme-switch-wrapper">
             <label for="checkbox" class="theme-switch">
