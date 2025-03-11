@@ -1,34 +1,33 @@
 <template>
-    <nav class ="w3-sidebar w3-collapse w3-animate-left" style="z-index:3;width:300px;" id="mySidebar">
+    <nav class="w3-sidebar w3-collapse w3-animate-left" style="z-index:3;width:300px;" id="mySidebar">
         <br>
 
-        <div class ="w3-container">
-            <a href="#" @click="sidebarClose()" class ="icon-color w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
-                <i class ="fa fa-remove"></i>
+        <div class="w3-container">
+            <a href="#" @click="sidebarClose()" class="icon-color w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+                <i class="fa fa-remove"></i>
             </a>
-            <a href="/"><img src="./../../assets/image/avatar/avatar_1.PNG" style="width: 50%;" class ="w3-round" alt="My protfolio"></a>
+            <a href="/"><img src="./../../assets/image/avatar/avatar_1.PNG" style="width: 50%;" class="w3-round" alt="My protfolio"></a>
             <br><br>
             <h4 class="title--n"><b>LÊ TRƯỜNG AN</b></h4>
-            <p class ="text-slogan hidden">khongbaogionhanminhngu</p>
+            <p class="text-slogan hidden">khongbaogionhanminhngu</p>
         </div>
 
-        <div class ="w3-bar-block">
-            <router-link :to="`/resume`" class="text-nav w3-bar-item w3-button w3-padding">    
-                <i class ="fa fa-th-large fa-fw w3-margin-right"></i>RESUME
+        <div class="w3-bar-block">
+            <router-link :to="`/resume`" :class="{ active: $route.path === '/resume' }" class="text-nav w3-bar-item w3-button w3-padding">    
+                <i class="fa fa-address-card-o fa-fw w3-margin-right"></i>RESUME
             </router-link>
 
-            <a href="/" class="text-nav w3-bar-item w3-button w3-padding">
-                <i class ="fa fa-user fa-fw w3-margin-right"></i>ABOUT
+            <a href="mailto:truongan2700@gmail.com" class="text-nav w3-bar-item w3-button w3-padding">
+                <i class="fa fa-envelope w3-margin-right"></i>CONTACT
             </a>
-
-            <a href="/" class ="text-nav w3-bar-item w3-button w3-padding">
-                <i class ="fa fa-envelope w3-margin-right"></i>CONTACT
-            </a>
+            <router-link :to="`/manga/search`" v-if="isActive('/manga')" :class="{ active: $route.path === '/manga/search' }" class="text-nav w3-bar-item w3-button w3-padding">    
+                <i class="fa fa-book fa-fw w3-margin-right"></i>Manga
+            </router-link>
         </div>  
 
-        <div class ="w3-panel w3-large">
-            <a class ="w3-margin-right icon-color">
-                <i class ="fa fa-facebook-official w3-hover-opacity"></i>
+        <div class="w3-panel w3-large">
+            <a href="https://fb.com/truongan15" class="w3-margin-right icon-color">
+                <i class="fa fa-facebook-official w3-hover-opacity"></i>
             </a> 
         </div>
         <div class="theme-switch-wrapper">
@@ -74,7 +73,11 @@
             sidebarClose() {
                 document.getElementById("mySidebar").style.display = "none";
                 document.getElementById("myOverlay").style.display = "none";
-            }   
+            },
+            isActive(route) {
+                //console.log(this.$route.path.startsWith(route))
+                return this.$route.path.startsWith(route);
+            },
         }            
     }
 </script>
@@ -82,5 +85,9 @@
 <style>
     .text-nav {
         color: var(--text-black);
+    }
+    .router-link-exact-active.text-nav {
+        color: var(--icon-green);
+        font-weight: bold;
     }
 </style>

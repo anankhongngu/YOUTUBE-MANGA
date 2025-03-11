@@ -9,7 +9,7 @@
                     <div class="title">
                         <h4>Reading:</h4>
                         <h2>{{ manga.title }}</h2>
-                        <p>{{ manga.description }}</p>
+                        <p>{{ manga.description ? manga.description.slice(0, 100) + '...' : '...' }}</p>
                     </div>
                     <div class="cd">
                         <!-- <router-link></router-link> -->
@@ -19,18 +19,18 @@
                     <div class="chapter">
                         <h2>Các chapter:</h2>
                         <ul>
-                            <li v-for="chapter in chapters" :key="chapter.id">
-                                <a class="anbcas" @click="fetchChaptersDetail(chapter.id)"
+                            <li v-for="(chapter,index) in chapters" :key="chapter.id">
+                                <a class="anbcas" @click="fetchChaptersDetail(chapter.id,index)"
                                 :class="{'active':  currentID === chapter.id}" 
-                                >{{ chapter.chap }}. {{ chapter.title }}</a>
-                            </li>  
+                                >{{ chapter.title }}</a>
+                            </li> 
                         </ul>
                     </div>
                     <div class="control">
-                        <div class="btn btn-prev">
+                        <div class="btn btn-prev"  @click="prevChapter">
                             <i class="fa fa-step-backward"></i>
                         </div>
-                        <div class="btn btn-next">
+                        <div class="btn btn-next"  @click="nextChapter">
                             <i class="fa fa-step-forward"></i>
                         </div>
                     </div>
@@ -93,7 +93,9 @@ export default {
                 title: chap.attributes.title || `Chapter ${chap.attributes.chapter}`,
             }))
             //console.log(this.chapters[0])
-            this.fetchChaptersDetail(this.chapters[0].id)
+            if(this.chapters[0]){
+                this.fetchChaptersDetail(this.chapters[0].id, 0)
+            }
         },      
         getTitle (attributes) {
             return attributes.title.vi || attributes.title.en || attributes.title.ja || 'Chưa có tiêu đề';
@@ -101,15 +103,32 @@ export default {
         getDescription (attributes) {
             return attributes.description.vi || attributes.description.en || attributes.description.ja || 'Đang cập nhật mô tả';
         },
-        async fetchChaptersDetail (id){
+        async fetchChaptersDetail (id, index){
             this.listImgChap = [];
             window.scrollTo({ top: 0, behavior: 'smooth' })
+            this.currentChap = index
             this.currentID = id
             const response = await axios.get(`https://api.mangadex.org/at-home/server/${id}`);
             this.listImgChap = response.data.chapter.data.map(img => ({
                 imgChapter: img ? `https://uploads.mangadex.org/data/${response.data.chapter.hash}/${img}` : ''
             }))
+        }, 
+        nextChapter() {
+            if (this.chapters.length === 0) return;
+            let nextIndex;
+            nextIndex = (this.currentChap + 1) % this.chapters.length;   
+            this.loadChapterHandle(nextIndex);
         },
+        prevChapter() {
+            if (this.chapters.length === 0) return;
+            let prevIndex;
+            prevIndex = this.currentChap > 0 ? (this.currentChap - 1 + this.chapters.length) % this.chapters.length : 0;
+            this.loadChapterHandle(prevIndex);
+        },
+        async loadChapterHandle(index){
+            const chapId = this.chapters[index].id;
+            await this.fetchChaptersDetail(chapId,index);
+        }
     }
 }
 </script>
@@ -117,6 +136,12 @@ export default {
     .chapter li a.active {
         color: var(--icon-green);
         text-decoration: underline;
+        font-weight: bold;
+    }
+    .chapter h2 {
+        color: var(--black);
+        margin: 15px 0;
+        font-size: 16px;
         font-weight: bold;
     }
 </style>

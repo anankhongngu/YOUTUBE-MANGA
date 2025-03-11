@@ -4,7 +4,7 @@
             <img src="https://i.pinimg.com/564x/eb/57/6f/eb576ff023487bcb1fa3ad61ee7b23ee.jpg" alt="">
         </div>
         <div class="name">
-            <h1>HO HOANG</h1>
+            <h1>LE TRUONG AN</h1>
             <div class="specialize">Frond-End Developer</div>
             <ul class="contact">
                 <li>
@@ -74,11 +74,12 @@
             </h2>
             <ul>
                 <li>HTML</li>
-                <li>CSS</li>
+                <li>CSS / SCSS</li>
                 <li>Bootstrap</li>
                 <li>Javascript / jQuery</li>
                 <li>Vuejs</li>
                 <li>Liquid</li>
+                <li>Optimize Google Pagespeed</li>
                 <li>Git</li>
             </ul>
         </div>
@@ -115,7 +116,7 @@
                     <p>Here, I handle front-end web edits through a ticketing system. The company uses the Liquid programming language, which is similar to Shopify. This has been a period where I continuously strive to learn and explore new knowledge to improve myself.</p>    
                 </div>
             </div>
-
+            
             <div class="item">
                 <h4>More information</h4>
                 <div class="des">
@@ -124,10 +125,16 @@
                         I am always eager to learn and improve, with a strong focus on building user-friendly, efficient products that meet the needs of users.
                     </p>
                     <p>Some projects using Vuejs: </p>
-                    <ul>  
+                    <ul class="style-ul">  
                         <li><a href="https://github.com/anankhongngu/Todo-List">Todo List: https://github.com/anankhongngu/Todo-List</a></li>
                         <li><a href="https://github.com/anankhongngu/Todo-List">Youtube music + Manga GET API: https://github.com/anankhongngu/YOUTUBE-MANGA</a></li>
                     </ul>
+                </div>
+            </div>
+            <div class="item">
+                <h4>Interest</h4>
+                <div class="des">
+                    <p>Soccer, badminton, games</p>
                 </div>
             </div>
         </div>
@@ -254,5 +261,12 @@ list-style: none;
     border-radius: 50%;
     left: -37px;
 }
-
+.style-ul li {
+    list-style: inside;
+    padding-left: 25px;
+    margin-top: 12px;
+}
+.style-ul li a {
+    color: var(--icon-green);
+}
 </style>
