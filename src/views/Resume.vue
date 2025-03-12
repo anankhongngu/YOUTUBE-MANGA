@@ -88,7 +88,10 @@
             <div class="item">
                 <h4>Frond-end Developer</h4>
                 <div class="time">
-                    10/2019 - 2021 - Nhan Hoa Software Company
+                    10/2019 - 2021
+                </div>
+                <div class="time">
+                    Nhan Hoa Software Company
                 </div>
                 <div class="location">
                     Frond-end Developer
@@ -107,7 +110,10 @@
             <div class="item">
                 <h4>Frond-end Developer</h4>
                 <div class="time">
-                    2021 - Currently - Working at haravan technology joint stock company
+                    2021 - Currently
+                </div>
+                <div class="time">
+                    Working at haravan technology joint stock company
                 </div>
                 <div class="location">
                     Frond-end Developer
@@ -117,8 +123,9 @@
                 </div>
             </div>
             
+            <h2>MORE INFOMATION</h2>
             <div class="item">
-                <h4>More information</h4>
+                <h4>Self-study</h4>
                 <div class="des">
                     <p>
                         I consider myself a quick learner and consistently complete tasks effectively. 
@@ -247,7 +254,8 @@ list-style: none;
     font-weight: bold;display: block;
 }
 .project .location{
-    font-weight: 500;
+    font-weight: bold;
+    padding: 10px 0;
 }
 .project .item{
     position: relative;
