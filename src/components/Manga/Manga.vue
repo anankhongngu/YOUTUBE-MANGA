@@ -58,7 +58,7 @@ export default {
             this.textEmpty = 'Đang tìm kiếm truyện...';
             this.mangaList = [];
 
-            const url = `https://api.mangadex.org/manga?title=${encodeURIComponent(this.query)}`;
+            const url = `https://api.mangadex.org/manga?title=${encodeURIComponent(this.query)}&limit=20&availableTranslatedLanguage[]=vi`;
             
             try {
                 const response = await axios.get(url);
@@ -67,7 +67,7 @@ export default {
                     return;
                 }
                 const mangaDetailsPromises = response.data.data.map(manga =>
-                    axios.get(`https://api.mangadex.org/manga/${manga.id}?includes[]=artist&includes[]=author&includes[]=cover_art`)
+                    axios.get(`https://api.mangadex.org/manga/${manga.id}?includes[]=artist&includes[]=author&includes[]=cover_art&availableTranslatedLanguages[]=vi`)
                         .then(res => this.mangaData(manga.id, res.data.data))
                         .catch(() => null) 
                 );

@@ -20,7 +20,7 @@
             <a href="mailto:truongan2700@gmail.com" class="text-nav w3-bar-item w3-button w3-padding">
                 <i class="fa fa-envelope w3-margin-right"></i>CONTACT
             </a>
-            <router-link :to="`/manga/search`" v-if="isActive('/manga')" :class="{ active: $route.path === '/manga/search' }" class="text-nav w3-bar-item w3-button w3-padding">    
+            <router-link :to="`/manga/search`" v-if="isActive('/manga')" :class="{ active: isActive('/manga') }" class="text-nav w3-bar-item w3-button w3-padding">    
                 <i class="fa fa-book fa-fw w3-margin-right"></i>Manga
             </router-link>
         </div>  
@@ -86,7 +86,7 @@
     .text-nav {
         color: var(--text-black);
     }
-    .router-link-exact-active.text-nav {
+    .active.text-nav {
         color: var(--icon-green);
         font-weight: bold;
     }

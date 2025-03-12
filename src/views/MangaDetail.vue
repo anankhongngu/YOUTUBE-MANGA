@@ -57,6 +57,7 @@ export default {
         return {
             isActive: false,
             currentID: null,
+            currentChap: 0,
             manga: {
                 title: '',
                 cover: '',
@@ -75,11 +76,11 @@ export default {
     },
     methods: {
         async fetchMangaDetails () {
-            const response = await axios.get(`https://api.mangadex.org/manga/${this.id}?includes[]=cover_art`)
+            const response = await axios.get(`https://api.mangadex.org/manga/${this.id}?includes[]=cover_art&availableTranslatedLanguage[]=vi`)
             const data = response.data.data
 
             const cover = data.relationships.find(item => item.type === 'cover_art')
-            this.manga = {
+            this.manga = { 
                 title: this.getTitle(data.attributes),
                 description: this.getDescription(data.attributes),
                 cover: cover ? `https://uploads.mangadex.org/covers/${this.id}/${cover.attributes.fileName}` : ''
@@ -112,24 +113,26 @@ export default {
             this.listImgChap = response.data.chapter.data.map(img => ({
                 imgChapter: img ? `https://uploads.mangadex.org/data/${response.data.chapter.hash}/${img}` : ''
             }))
-        }, 
+        },  
         nextChapter() {
             if (this.chapters.length === 0) return;
             let nextIndex;
             nextIndex = (this.currentChap + 1) % this.chapters.length;   
+            if(nextIndex == 0) return;
             this.loadChapterHandle(nextIndex);
         },
         prevChapter() {
             if (this.chapters.length === 0) return;
             let prevIndex;
             prevIndex = this.currentChap > 0 ? (this.currentChap - 1 + this.chapters.length) % this.chapters.length : 0;
+            if(prevIndex == 0 ) return;
             this.loadChapterHandle(prevIndex);
         },
         async loadChapterHandle(index){
             const chapId = this.chapters[index].id;
             await this.fetchChaptersDetail(chapId,index);
         }
-    }
+    } 
 }
 </script>
 <style>
